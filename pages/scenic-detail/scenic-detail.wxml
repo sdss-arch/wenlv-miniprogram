@@ -1,0 +1,43 @@
+<view class="container">
+  <view class="header-section">
+    <image class="cover-image" src="{{scenic.image}}" mode="aspectFill"></image>
+    <view class="header-info">
+      <text class="scenic-name">{{scenic.name}}</text>
+      <view class="scenic-tags">
+        <text class="tag" wx:for="{{scenic.tags}}" wx:key="index">{{item}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="info-section">
+    <view class="info-item">
+      <text class="info-label">地址</text>
+      <text class="info-value">{{scenic.address}}</text>
+    </view>
+    <view class="info-item">
+      <text class="info-label">开放时间</text>
+      <text class="info-value">{{scenic.openTime}}</text>
+    </view>
+    <view class="info-item">
+      <text class="info-label">门票</text>
+      <text class="info-value price" wx:if="{{scenic.price > 0}}">¥{{scenic.price}}</text>
+      <text class="info-value free" wx:else>免费</text>
+    </view>
+    <view class="info-item">
+      <text class="info-label">电话</text>
+      <text class="info-value">{{scenic.phone}}</text>
+    </view>
+  </view>
+
+  <view class="content-section">
+    <view class="section-title">景点介绍</view>
+    <text class="content-text">{{scenic.description}}</text>
+  </view>
+
+  <view class="image-section" wx:if="{{scenic.images && scenic.images.length > 0}}">
+    <view class="section-title">景点图片</view>
+    <view class="image-list">
+      <image wx:for="{{scenic.images}}" wx:key="index" class="detail-image" src="{{item}}" mode="widthFix" bindtap="previewImage" data-src="{{item}}"></image>
+    </view>
+  </view>
+</view>

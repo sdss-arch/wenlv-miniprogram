@@ -1,0 +1,69 @@
+<view class="container">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <view class="search-input-wrapper">
+      <input class="search-input" type="text" placeholder="搜索" value="{{searchKeyword}}" bindinput="onSearchInput" confirm-type="search" bindconfirm="onSearch" />
+    </view>
+    <view class="publish-btn" bindtap="goToPublishActivity">
+      <text class="publish-icon">+</text>
+      <text class="publish-text">发布</text>
+    </view>
+  </view>
+
+  <!-- 分类标签 -->
+  <scroll-view class="category-scroll" scroll-x="true" show-scrollbar="false">
+    <view class="category-list">
+      <view class="category-item {{selectedCategory === '全部' ? 'active' : ''}}" bindtap="onCategoryTap" data-category="全部">
+        <text class="category-text">全部</text>
+      </view>
+      <view class="category-item {{selectedCategory === '文旅活动' ? 'active' : ''}}" bindtap="onCategoryTap" data-category="文旅活动">
+        <text class="category-text">文旅活动</text>
+      </view>
+      <view class="category-item {{selectedCategory === '旅行搭子' ? 'active' : ''}}" bindtap="onCategoryTap" data-category="旅行搭子">
+        <text class="category-text">旅行搭子</text>
+      </view>
+      <view class="category-item {{selectedCategory === '体育活动' ? 'active' : ''}}" bindtap="onCategoryTap" data-category="体育活动">
+        <text class="category-text">体育活动</text>
+      </view>
+      <view class="category-item {{selectedCategory === '读书活动' ? 'active' : ''}}" bindtap="onCategoryTap" data-category="读书活动">
+        <text class="category-text">读书活动</text>
+      </view>
+      <view class="category-item {{selectedCategory === '亲子活动' ? 'active' : ''}}" bindtap="onCategoryTap" data-category="亲子活动">
+        <text class="category-text">亲子活动</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 活动列表 -->
+  <view class="activity-list">
+    <view class="activity-card" wx:for="{{activities}}" wx:key="_id" bindtap="onActivityTap" data-id="{{item._id}}">
+      <view class="activity-image-wrapper">
+        <image class="activity-cover" src="{{item.coverImage}}" mode="aspectFill"></image>
+        <view class="activity-category-tag">{{item.category}}</view>
+      </view>
+      <view class="activity-content">
+        <text class="activity-title">{{item.title}}</text>
+        <text class="activity-time">{{item.startTime}}开始</text>
+        <view class="activity-footer">
+          <view class="join-users">
+            <image class="user-avatar" wx:for="{{item.joinUsers}}" wx:key="index" wx:for-item="user" src="{{user.avatar}}" mode="aspectFill"></image>
+            <text class="join-count">+{{item.joinCount}}人报名</text>
+          </view>
+          <view class="status-btn {{item.status}}">{{item.statusText}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="loading-more" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+
+  <view class="no-more" wx:if="{{!hasMore && activities.length > 0}}">
+    <text>没有更多了</text>
+  </view>
+
+  <view class="empty-state" wx:if="{{!loading && activities.length === 0}}">
+    <text class="empty-text">暂无活动</text>
+  </view>
+</view>

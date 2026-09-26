@@ -1,0 +1,86 @@
+.container {
+  padding: 20rpx;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.city-tag {
+  background: linear-gradient(135deg, #C78748 0%, #AD683A 100%);
+  color: #ffffff;
+  padding: 8rpx 20rpx;
+  border-radius: 8rpx;
+  font-size: 26rpx;
+  margin-right: 16rpx;
+}
+
+.page-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.recommend-list {
+  margin-bottom: 20rpx;
+}
+
+.recommend-card {
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  overflow: hidden;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+.recommend-image {
+  width: 100%;
+  height: 300rpx;
+  background-color: #e0e0e0;
+}
+
+.recommend-info {
+  padding: 24rpx;
+}
+
+.recommend-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.recommend-type {
+  font-size: 26rpx;
+  color: #C78748;
+  background-color: #e6f7ed;
+  padding: 4rpx 16rpx;
+  border-radius: 8rpx;
+  display: inline-block;
+  margin-bottom: 12rpx;
+}
+
+.recommend-brief {
+  font-size: 26rpx;
+  color: #666666;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100rpx 0;
+}
+
+.empty-text {
+  font-size: 30rpx;
+  color: #999999;
+}

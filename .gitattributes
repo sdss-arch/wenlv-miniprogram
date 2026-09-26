@@ -1,0 +1,17 @@
+# 统一换行符处理
+* text=auto
+
+# 源码文件统一 LF
+*.js text eol=lf
+*.json text eol=lf
+*.wxml text eol=lf
+*.wxss text eol=lf
+*.md text eol=lf
+
+# 图片按二进制处理
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary

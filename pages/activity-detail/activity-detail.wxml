@@ -1,0 +1,126 @@
+<view class="container">
+  <!-- 活动封面 -->
+  <view class="cover-section">
+    <image class="activity-cover" src="{{activity.coverImage}}" mode="aspectFill"></image>
+    <view class="cover-overlay"></view>
+  </view>
+
+  <!-- 活动标题 -->
+  <view class="title-section">
+    <text class="activity-title">{{activity.title}}</text>
+  </view>
+
+  <!-- 报名信息 -->
+  <view class="join-section">
+    <view class="join-users">
+      <image class="user-avatar" wx:for="{{activity.joinUsers}}" wx:key="index" wx:for-item="user" src="{{user.avatar}}" mode="aspectFill"></image>
+    </view>
+    <view class="view-list" bindtap="viewJoinList">
+      <text class="view-list-text">查看名单 ></text>
+    </view>
+  </view>
+
+  <!-- 活动信息 -->
+  <view class="info-section">
+    <view class="info-item">
+      <view class="info-icon-wrapper">
+        <text class="info-icon">¥</text>
+      </view>
+      <view class="info-content">
+        <text class="info-label">活动费用</text>
+        <text class="info-value">{{activity.fee || 0}} 每人</text>
+      </view>
+    </view>
+    <view class="info-divider"></view>
+    <view class="info-item">
+      <view class="info-icon-wrapper">
+        <text class="info-icon">⏱</text>
+      </view>
+      <view class="info-content">
+        <text class="info-label">{{activity.startTime}}</text>
+        <text class="info-value">预计活动时长{{activity.duration || '5h'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 活动地点 -->
+  <view class="section">
+    <view class="section-title">
+      <text class="title-text">活动地点</text>
+    </view>
+    <view class="location-item" bindtap="openLocation">
+      <text class="location-icon">📍</text>
+      <text class="location-text">{{activity.location}}</text>
+      <text class="location-arrow">></text>
+    </view>
+  </view>
+
+  <!-- 活动规则 -->
+  <view class="section">
+    <view class="section-title">
+      <text class="title-text">活动规则</text>
+    </view>
+    <view class="rule-list">
+      <view class="rule-item">
+        <text class="rule-label">报名状态：</text>
+        <text class="rule-value {{activity.status}}">{{activity.statusText}}</text>
+      </view>
+      <view class="rule-item">
+        <text class="rule-label">活动时间：</text>
+        <text class="rule-value">{{activity.startTime}} 至 {{activity.endTime}}</text>
+      </view>
+      <view class="rule-item">
+        <text class="rule-label">报名截止时间：</text>
+        <text class="rule-value">{{activity.deadline}}</text>
+      </view>
+      <view class="rule-item">
+        <text class="rule-label">人数限定：</text>
+        <text class="rule-value">{{activity.joinCount}}/{{activity.maxCount}}</text>
+      </view>
+      <view class="rule-item">
+        <text class="rule-label">审核规则：</text>
+        <text class="rule-value">{{activity.auditRule || '报名后无需审核'}}</text>
+      </view>
+      <view class="rule-item">
+        <text class="rule-label">取消规则：</text>
+        <text class="rule-value">{{activity.cancelRule || '报名随时可取消'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 活动内容 -->
+  <view class="section">
+    <view class="section-title">
+      <text class="title-text">活动内容</text>
+    </view>
+    <view class="content-section">
+      <rich-text class="activity-content" nodes="{{activity.content}}"></rich-text>
+    </view>
+  </view>
+
+  <!-- 底部占位 -->
+  <view class="bottom-placeholder"></view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <view class="action-btn" bindtap="shareActivity">
+      <text class="action-icon">⇪</text>
+      <text class="action-text">分享</text>
+    </view>
+    <view class="action-btn {{isFavorited ? 'active' : ''}}" bindtap="toggleFavorite">
+      <text class="action-icon">☆</text>
+      <text class="action-text">收藏</text>
+    </view>
+    <view class="comment-btn" bindtap="showComments">
+      <text class="comment-text">评论 ({{commentCount || 0}})</text>
+    </view>
+    <view class="join-btn {{activity.status === 'ongoing' ? '' : 'disabled'}}" bindtap="joinActivity">
+      <text class="join-text">{{isJoined ? '已报名' : '我要报名'}}</text>
+    </view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-state" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>

@@ -1,0 +1,54 @@
+<view class="container">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <view class="search-input-wrapper">
+      <input class="search-input" type="text" placeholder="搜索姓名" value="{{searchKeyword}}" bindinput="onSearchInput" confirm-type="search" bindconfirm="onSearch" />
+      <view class="clear-btn" wx:if="{{searchKeyword}}" bindtap="clearSearch">
+        <text class="clear-icon">×</text>
+      </view>
+    </view>
+    <view class="publish-btn" bindtap="goToPublish">
+      <text class="publish-icon">+</text>
+      <text class="publish-text">发布</text>
+    </view>
+  </view>
+
+  <!-- 顶部标签切换 -->
+  <view class="tab-header">
+    <view class="tab-item {{currentTab === 'martyr' ? 'active' : ''}}" bindtap="switchTab" data-tab="martyr">
+      <text class="tab-text">革命烈士</text>
+    </view>
+    <view class="tab-item {{currentTab === 'celebrity' ? 'active' : ''}}" bindtap="switchTab" data-tab="celebrity">
+      <text class="tab-text">名人</text>
+    </view>
+  </view>
+
+  <!-- 革命烈士列表 -->
+  <view class="content-list" wx:if="{{currentTab === 'martyr'}}">
+    <view class="person-card" wx:for="{{filteredMartyrList}}" wx:key="_id" bindtap="onPersonTap" data-id="{{item._id}}" data-type="martyr">
+      <image class="person-image" src="{{item.photo}}" mode="aspectFill"></image>
+      <view class="person-info">
+        <text class="person-name">{{item.name}}</text>
+        <text class="person-intro">{{item.introduction}}</text>
+      </view>
+    </view>
+    <view class="empty-state" wx:if="{{!loading && filteredMartyrList.length === 0}}">
+      <text class="empty-text">{{searchKeyword ? '未找到匹配的烈士' : '暂无革命烈士数据'}}</text>
+    </view>
+  </view>
+
+  <!-- 名人列表 -->
+  <view class="content-list" wx:if="{{currentTab === 'celebrity'}}">
+    <view class="person-card" wx:for="{{filteredCelebrityList}}" wx:key="_id" bindtap="onPersonTap" data-id="{{item._id}}" data-type="celebrity">
+      <image class="person-image" src="{{item.photo}}" mode="aspectFill"></image>
+      <view class="person-info">
+        <text class="person-name">{{item.name}}</text>
+        <text class="person-intro">{{item.introduction}}</text>
+      </view>
+    </view>
+    <view class="empty-state" wx:if="{{!loading && filteredCelebrityList.length === 0}}">
+      <text class="empty-text">{{searchKeyword ? '未找到匹配的名人' : '暂无名人数据'}}</text>
+    </view>
+  </view>
+
+</view>

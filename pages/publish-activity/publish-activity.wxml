@@ -1,0 +1,166 @@
+<view class="container">
+  <!-- 标题 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot"></text>
+      <text>活动标题</text>
+    </view>
+    <input class="form-input" type="text" placeholder="请输入活动标题" value="{{form.title}}" bindinput="onInput" data-field="title" maxlength="50" />
+  </view>
+
+  <!-- 分类 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot"></text>
+      <text>活动分类</text>
+    </view>
+    <picker mode="selector" range="{{categories}}" value="{{categoryIndex}}" bindchange="onCategoryChange">
+      <view class="picker-box">
+        <text class="picker-text {{form.category ? '' : 'placeholder'}}">{{form.category || '请选择分类'}}</text>
+        <text class="picker-arrow">›</text>
+      </view>
+    </picker>
+  </view>
+
+  <!-- 人数上限 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot"></text>
+      <text>人数上限</text>
+      <text class="input-tip">0为不限制</text>
+    </view>
+    <input class="form-input" type="number" placeholder="请输入人数上限" value="{{form.maxCount}}" bindinput="onInput" data-field="maxCount" />
+  </view>
+
+  <!-- 活动开始时间 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot"></text>
+      <text>活动开始时间</text>
+    </view>
+    <picker mode="multiSelector" range="{{startTimeArray}}" value="{{startTimeIndex}}" bindchange="onStartTimeChange" bindcolumnchange="onStartTimeColumnChange">
+      <view class="picker-box">
+        <text class="picker-text {{form.startTime ? '' : 'placeholder'}}">{{form.startTime || '请选择开始时间'}}</text>
+        <text class="picker-arrow">›</text>
+      </view>
+    </picker>
+  </view>
+
+  <!-- 活动结束时间 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot"></text>
+      <text>活动结束时间</text>
+    </view>
+    <picker mode="multiSelector" range="{{endTimeArray}}" value="{{endTimeIndex}}" bindchange="onEndTimeChange" bindcolumnchange="onEndTimeColumnChange">
+      <view class="picker-box">
+        <text class="picker-text {{form.endTime ? '' : 'placeholder'}}">{{form.endTime || '请选择结束时间'}}</text>
+        <text class="picker-arrow">›</text>
+      </view>
+    </picker>
+  </view>
+
+  <!-- 报名截止时间 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot"></text>
+      <text>报名截止时间</text>
+    </view>
+    <picker mode="multiSelector" range="{{deadlineArray}}" value="{{deadlineIndex}}" bindchange="onDeadlineChange" bindcolumnchange="onDeadlineColumnChange">
+      <view class="picker-box">
+        <text class="picker-text {{form.deadline ? '' : 'placeholder'}}">{{form.deadline || '请选择截止时间'}}</text>
+        <text class="picker-arrow">›</text>
+      </view>
+    </picker>
+  </view>
+
+  <!-- 活动地点 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot"></text>
+      <text>活动地点</text>
+      <text class="location-btn" bindtap="chooseLocation">📍选择地图定位</text>
+    </view>
+    <input class="form-input" type="text" placeholder="请填写活动地址" value="{{form.location}}" bindinput="onInput" data-field="location" maxlength="500" />
+  </view>
+
+  <!-- 预计时长 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot"></text>
+      <text>预计时长(小时)</text>
+    </view>
+    <input class="form-input" type="digit" placeholder="请填写预计时长" value="{{form.duration}}" bindinput="onInput" data-field="duration" />
+  </view>
+
+  <!-- 活动费用 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot"></text>
+      <text>活动费用(元)</text>
+    </view>
+    <input class="form-input" type="digit" placeholder="请填写活动费用，0为免费" value="{{form.cost}}" bindinput="onInput" data-field="cost" />
+  </view>
+
+  <!-- 负责人姓名 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot"></text>
+      <text>负责人姓名</text>
+    </view>
+    <input class="form-input" type="text" placeholder="请输入负责人姓名" value="{{form.contactName}}" bindinput="onInput" data-field="contactName" maxlength="20" />
+  </view>
+
+  <!-- 负责人联系方式 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot"></text>
+      <text>负责人联系方式</text>
+    </view>
+    <input class="form-input" type="number" placeholder="请输入手机号" value="{{form.contactPhone}}" bindinput="onInput" data-field="contactPhone" maxlength="11" />
+  </view>
+
+  <!-- 活动内容 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot"></text>
+      <text>活动内容</text>
+      <text class="char-count">{{form.content.length || 0}}/1000</text>
+    </view>
+    <textarea class="form-textarea" placeholder="请详细描述活动内容、流程、注意事项等..." value="{{form.content}}" bindinput="onContentInput" maxlength="1000"></textarea>
+  </view>
+
+  <!-- 活动封面上传 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot optional"></text>
+      <text>活动封面</text>
+      <text class="char-count">{{form.coverImages.length}}/8</text>
+    </view>
+    <view class="image-list">
+      <view class="image-item" wx:for="{{form.coverImages}}" wx:key="index">
+        <image class="item-image" src="{{item}}" mode="aspectFill" bindtap="previewImage" data-url="{{item}}"></image>
+        <view class="delete-icon" bindtap="deleteImage" data-index="{{index}}">×</view>
+      </view>
+      <view wx:if="{{form.coverImages.length < 8}}" class="upload-item" bindtap="chooseImage">
+        <view class="upload-plus">+</view>
+        <text class="upload-desc">添加图片</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提示 -->
+  <view class="tips-section">
+    <text class="tips-text">提示：发布的内容需要审核后才能显示</text>
+  </view>
+
+  <!-- 底部占位 -->
+  <view class="bottom-placeholder"></view>
+</view>
+
+<!-- 提交按钮 -->
+<view class="submit-bar">
+  <button class="btn-submit {{!canSubmit ? 'disabled' : ''}}" bindtap="submitForm" disabled="{{!canSubmit || submitting}}">
+    {{submitting ? '发布中...' : '确认发布'}}
+  </button>
+</view>

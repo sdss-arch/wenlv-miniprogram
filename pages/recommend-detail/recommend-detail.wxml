@@ -1,0 +1,39 @@
+<view class="container">
+  <view class="header-section">
+    <image class="cover-image" src="{{recommend.image}}" mode="aspectFill"></image>
+    <view class="header-info">
+      <text class="recommend-name">{{recommend.name}}</text>
+      <view class="recommend-tags">
+        <text class="tag" wx:for="{{recommend.tags}}" wx:key="index">{{item}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="info-section">
+    <view class="info-item">
+      <text class="info-label">类型</text>
+      <text class="info-value">{{recommend.type}}</text>
+    </view>
+    <view class="info-item">
+      <text class="info-label">地址</text>
+      <text class="info-value">{{recommend.address}}</text>
+    </view>
+    <view class="info-item">
+      <text class="info-label">人均消费</text>
+      <text class="info-value price" wx:if="{{recommend.price > 0}}">¥{{recommend.price}}</text>
+      <text class="info-value free" wx:else>免费</text>
+    </view>
+  </view>
+
+  <view class="content-section">
+    <view class="section-title">推荐理由</view>
+    <text class="content-text">{{recommend.reason}}</text>
+  </view>
+
+  <view class="image-section" wx:if="{{recommend.images && recommend.images.length > 0}}">
+    <view class="section-title">图片展示</view>
+    <view class="image-list">
+      <image wx:for="{{recommend.images}}" wx:key="index" class="detail-image" src="{{item}}" mode="widthFix" bindtap="previewImage" data-src="{{item}}"></image>
+    </view>
+  </view>
+</view>

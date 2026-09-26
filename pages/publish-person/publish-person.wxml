@@ -1,0 +1,73 @@
+<view class="container">
+  <!-- 顶部照片区域 -->
+  <view class="photo-section">
+    <view class="photo-upload" bindtap="choosePhoto">
+      <image wx:if="{{photoUrl}}" class="photo-image" src="{{photoUrl}}" mode="aspectFill"></image>
+      <view wx:else class="photo-empty">
+        <view class="camera-icon">
+          <view class="camera-circle">
+            <text class="camera-plus">+</text>
+          </view>
+        </view>
+        <text class="photo-tip">添加人物照片</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 表单内容 -->
+  <view class="form-content">
+    <!-- 类型选择 -->
+    <view class="form-item">
+      <view class="item-label">
+        <text class="label-dot"></text>
+        <text>人物类型</text>
+      </view>
+      <view class="type-options">
+        <view class="type-item {{personType === 'martyr' ? 'selected' : ''}}" bindtap="selectType" data-type="martyr">
+          <text class="type-name">革命烈士</text>
+          <view wx:if="{{personType === 'martyr'}}" class="check-icon">✓</view>
+        </view>
+        <view class="type-item {{personType === 'celebrity' ? 'selected' : ''}}" bindtap="selectType" data-type="celebrity">
+          <text class="type-name">名人</text>
+          <view wx:if="{{personType === 'celebrity'}}" class="check-icon">✓</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 姓名 -->
+    <view class="form-item">
+      <view class="item-label">
+        <text class="label-dot"></text>
+        <text>姓名</text>
+      </view>
+      <input class="text-input" type="text" placeholder="请输入人物姓名" value="{{name}}" bindinput="onNameInput" />
+    </view>
+
+    <!-- 简介 -->
+    <view class="form-item">
+      <view class="item-label">
+        <text class="label-dot"></text>
+        <text>人物简介</text>
+        <text class="label-count">{{introduction.length || 0}}/200</text>
+      </view>
+      <textarea class="area-input" placeholder="请简要介绍人物事迹、贡献等..." value="{{introduction}}" bindinput="onIntroInput" maxlength="200"></textarea>
+    </view>
+
+    <!-- 详细经历 -->
+    <view class="form-item">
+      <view class="item-label">
+        <text class="label-dot optional"></text>
+        <text>详细经历</text>
+        <text class="label-count">{{experience.length || 0}}/1000</text>
+      </view>
+      <textarea class="area-input large" placeholder="请详细描述人物生平经历（选填）..." value="{{experience}}" bindinput="onExperienceInput" maxlength="1000"></textarea>
+    </view>
+  </view>
+
+  <!-- 底部提交按钮 -->
+  <view class="submit-bar">
+    <button class="submit-btn {{!canSubmit ? 'disabled' : ''}}" bindtap="submitForm" disabled="{{!canSubmit || submitting}}">
+      <text class="btn-text">{{submitting ? '发布中...' : '确认发布'}}</text>
+    </button>
+  </view>
+</view>

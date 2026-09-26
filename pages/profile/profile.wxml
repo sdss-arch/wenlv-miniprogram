@@ -1,0 +1,98 @@
+<view class="container">
+  <!-- 用户信息区域 -->
+  <view class="user-section">
+    <view class="user-info" bindtap="onRefreshUserInfo">
+      <image class="user-avatar" src="{{userInfo.avatarUrl || '/images/avatar/默认头像1.jpg'}}" mode="aspectFill"></image>
+      <view class="user-detail">
+        <text class="user-name">{{userInfo.nickname || '游客'}}</text>
+        <view class="user-location" bindtap="onChangeCity" catchtap="stopPropagation">
+          <text class="location-text">{{cityName || '请选择城市'}}</text>
+          <text class="location-arrow">></text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 数据统计卡片 -->
+  <view class="stats-card">
+    <view class="stat-item" bindtap="onMenuTap" data-action="myActivities">
+      <text class="stat-num">0</text>
+      <text class="stat-label">我的活动</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item" bindtap="onMenuTap" data-action="myGuides">
+      <text class="stat-num">0</text>
+      <text class="stat-label">我的攻略</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item" bindtap="onMenuTap" data-action="myFavorites">
+      <text class="stat-num">0</text>
+      <text class="stat-label">我的收藏</text>
+    </view>
+  </view>
+
+  <!-- 常用功能 -->
+  <view class="list-card">
+    <view class="list-item" bindtap="onMenuTap" data-action="myActivities">
+      <view class="list-left">
+        <view class="list-icon-wrap">
+          <image class="list-icon-img" src="/images/menu/我的活动.png" mode="aspectFit"></image>
+        </view>
+        <text class="list-name">我的活动</text>
+      </view>
+      <text class="list-arrow">></text>
+    </view>
+    <view class="list-item" bindtap="onMenuTap" data-action="myGuides">
+      <view class="list-left">
+        <view class="list-icon-wrap">
+          <image class="list-icon-img" src="/images/menu/我的攻略.png" mode="aspectFit"></image>
+        </view>
+        <text class="list-name">我的攻略</text>
+      </view>
+      <text class="list-arrow">></text>
+    </view>
+    <view class="list-item" bindtap="onMenuTap" data-action="myFavorites">
+      <view class="list-left">
+        <view class="list-icon-wrap">
+          <image class="list-icon-img" src="/images/menu/我的收藏.png" mode="aspectFit"></image>
+        </view>
+        <text class="list-name">我的收藏</text>
+      </view>
+      <text class="list-arrow">></text>
+    </view>
+    <view class="list-item" bindtap="onMenuTap" data-action="myMessages">
+      <view class="list-left">
+        <view class="list-icon-wrap">
+          <image class="list-icon-img" src="/images/menu/留言板.png" mode="aspectFit"></image>
+        </view>
+        <text class="list-name">我的留言</text>
+      </view>
+      <text class="list-arrow">></text>
+    </view>
+  </view>
+
+  <!-- 其他功能 -->
+  <view class="list-card">
+    <view class="list-item" bindtap="onChangeCity">
+      <view class="list-left">
+        <view class="list-icon-wrap">
+          <image class="list-icon-img" src="/images/menu/切换.png" mode="aspectFit"></image>
+        </view>
+        <text class="list-name">切换城市</text>
+      </view>
+      <text class="list-arrow">></text>
+    </view>
+    <view class="list-item" bindtap="onMenuTap" data-action="about">
+      <view class="list-left">
+        <view class="list-icon-wrap">
+          <image class="list-icon-img" src="/images/menu/关于我们.png" mode="aspectFit"></image>
+        </view>
+        <text class="list-name">关于我们</text>
+      </view>
+      <text class="list-arrow">></text>
+    </view>
+  </view>
+
+  <!-- 城市选择弹窗 -->
+  <city-picker show="{{showCityPicker}}" bind:close="onCityPickerClose" bind:confirm="onCityPickerConfirm"></city-picker>
+</view>

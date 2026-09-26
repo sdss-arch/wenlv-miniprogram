@@ -1,0 +1,142 @@
+<view class="container">
+  <!-- 标题 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot"></text>
+      <text>攻略标题</text>
+    </view>
+    <input class="form-input" type="text" placeholder="请输入攻略标题" value="{{title}}" bindinput="onTitleInput" maxlength="50" />
+  </view>
+
+  <!-- 分类 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot"></text>
+      <text>攻略分类</text>
+    </view>
+    <picker mode="selector" range="{{categories}}" value="{{categoryIndex}}" bindchange="onCategoryChange">
+      <view class="picker-box">
+        <text class="picker-text {{category ? '' : 'placeholder'}}">{{category || '请选择分类'}}</text>
+        <text class="picker-arrow">›</text>
+      </view>
+    </picker>
+  </view>
+
+  <!-- 封面图片 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot"></text>
+      <text>封面图片</text>
+      <text class="char-count">{{coverImage ? '1/1' : '0/1'}}</text>
+    </view>
+    <view class="image-list">
+      <view class="image-item" wx:if="{{coverImage}}">
+        <image class="item-image" src="{{coverImage}}" mode="aspectFill" bindtap="previewCoverImage"></image>
+        <view class="delete-icon" bindtap="deleteCoverImage">×</view>
+      </view>
+      <view wx:if="{{!coverImage}}" class="upload-item" bindtap="chooseCoverImage">
+        <view class="upload-plus">+</view>
+        <text class="upload-desc">添加封面</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 简介 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot"></text>
+      <text>简介</text>
+      <text class="char-count">{{introduction.length || 0}}/200</text>
+    </view>
+    <textarea class="form-textarea" placeholder="请填写攻略简介" value="{{introduction}}" bindinput="onIntroInput" maxlength="200"></textarea>
+  </view>
+
+  <!-- 详情内容 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot"></text>
+      <text>详情内容</text>
+    </view>
+    <view class="content-editor">
+      <view wx:for="{{contentBlocks}}" wx:key="index" class="content-block">
+        <!-- 文本块 -->
+        <block wx:if="{{item.type === 'text'}}">
+          <textarea 
+            class="block-textarea" 
+            placeholder="{{index === 0 ? '请输入详细内容...' : '继续输入...'}}"
+            value="{{item.content}}"
+            data-index="{{index}}"
+            bindinput="onContentBlockInput"
+            auto-height
+            maxlength="5000"
+          />
+        </block>
+        
+        <!-- 图片块 -->
+        <block wx:if="{{item.type === 'image'}}">
+          <view class="block-image-wrapper">
+            <image class="block-image" src="{{item.content}}" mode="widthFix" bindtap="previewBlockImage" data-src="{{item.content}}"/>
+            <view class="image-delete" bindtap="deleteContentBlock" data-index="{{index}}">
+              <text class="delete-icon">×</text>
+            </view>
+          </view>
+        </block>
+      </view>
+      
+      <!-- 空状态 -->
+      <view wx:if="{{contentBlocks.length === 0}}" class="empty-content" bindtap="addFirstTextBlock">
+        <view class="upload-plus">+</view>
+        <text class="empty-text">点击开始输入内容</text>
+      </view>
+    </view>
+    
+    <!-- 编辑器工具栏 -->
+    <view class="editor-toolbar">
+      <view class="toolbar-btn" bindtap="insertImageToContent">
+        <text class="btn-icon">📷</text>
+        <text class="btn-text">插入图片</text>
+      </view>
+      <view class="toolbar-btn" bindtap="previewContent">
+        <text class="btn-icon">👁</text>
+        <text class="btn-text">预览</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提示 -->
+  <view class="tips-section">
+    <text class="tips-text">提示：发布的内容需要审核后才能显示</text>
+  </view>
+
+  <!-- 底部占位 -->
+  <view class="bottom-placeholder"></view>
+</view>
+
+<!-- 提交按钮 -->
+<view class="submit-bar">
+  <button class="btn-submit {{!canSubmit ? 'disabled' : ''}}" bindtap="submitForm" disabled="{{!canSubmit || submitting}}">
+    {{submitting ? '发布中...' : '确认发布'}}
+  </button>
+</view>
+
+<!-- 预览弹窗 -->
+<view class="preview-modal" wx:if="{{showPreview}}">
+  <view class="preview-mask" bindtap="closePreview"></view>
+  <view class="preview-content">
+    <view class="preview-header">
+      <text class="preview-title">预览</text>
+      <text class="preview-close" bindtap="closePreview">×</text>
+    </view>
+    <scroll-view class="preview-body" scroll-y>
+      <view class="preview-article">
+        <text class="article-title">{{title}}</text>
+        <view class="article-content">
+          <block wx:for="{{contentBlocks}}" wx:key="index">
+            <text wx:if="{{item.type === 'text'}}" class="article-text">{{item.content}}</text>
+            <image wx:if="{{item.type === 'image'}}" class="article-image" src="{{item.content}}" mode="widthFix"/>
+          </block>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

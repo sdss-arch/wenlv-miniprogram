@@ -1,0 +1,24 @@
+<view class="container">
+  <view class="page-header">
+    <text class="city-tag">{{cityName}}</text>
+    <text class="page-title">文创产品</text>
+  </view>
+
+  <view class="creative-grid">
+    <view class="creative-card" wx:for="{{creativeList}}" wx:key="_id" bindtap="onCreativeTap" data-id="{{item._id}}">
+      <image class="creative-image" src="{{item.image}}" mode="aspectFill"></image>
+      <view class="creative-info">
+        <text class="creative-name">{{item.name}}</text>
+        <text class="creative-desc">{{item.description}}</text>
+        <view class="creative-footer">
+          <text class="creative-price">¥{{item.price}}</text>
+          <text class="creative-shop">{{item.shopName}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty-state" wx:if="{{!loading && creativeList.length === 0}}">
+    <text class="empty-text">暂无文创产品</text>
+  </view>
+</view>

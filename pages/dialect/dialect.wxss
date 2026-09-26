@@ -1,0 +1,229 @@
+.container {
+  background-color: #FFF9EF;
+  min-height: 100vh;
+  padding: 20rpx;
+}
+
+/* 页面标题 */
+.page-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.city-tag {
+  background: linear-gradient(135deg, #C78748 0%, #AD683A 100%);
+  color: #ffffff;
+  padding: 8rpx 20rpx;
+  border-radius: 8rpx;
+  font-size: 26rpx;
+  margin-right: 16rpx;
+}
+
+.page-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333333;
+  flex: 1;
+}
+
+/* 发布按钮 */
+.publish-btn {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #C78748 0%, #AD683A 100%);
+  padding: 12rpx 24rpx;
+  border-radius: 32rpx;
+  box-shadow: 0 4rpx 12rpx rgba(173, 104, 58, 0.3);
+}
+
+.publish-icon {
+  font-size: 32rpx;
+  color: #ffffff;
+  margin-right: 8rpx;
+  font-weight: bold;
+}
+
+.publish-text {
+  font-size: 28rpx;
+  color: #ffffff;
+}
+
+/* 搜索栏 */
+.search-section {
+  margin-bottom: 20rpx;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 32rpx;
+  padding: 16rpx 24rpx;
+  box-shadow: 0 2rpx 8rpx rgba(173, 104, 58, 0.08);
+}
+
+.search-icon {
+  font-size: 32rpx;
+  margin-right: 16rpx;
+  color: #999999;
+}
+
+.search-input {
+  flex: 1;
+  font-size: 30rpx;
+  color: #333333;
+}
+
+.search-input::placeholder {
+  color: #cccccc;
+}
+
+.clear-btn {
+  width: 40rpx;
+  height: 40rpx;
+  background-color: #e0e0e0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clear-icon {
+  font-size: 24rpx;
+  color: #ffffff;
+}
+
+/* 方言列表 */
+.dialect-list {
+  margin-bottom: 20rpx;
+}
+
+.dialect-card {
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 8rpx rgba(173, 104, 58, 0.08);
+}
+
+.dialect-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.dialect-phrase {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #AD683A;
+}
+
+.play-btn {
+  width: 64rpx;
+  height: 64rpx;
+  background: linear-gradient(135deg, #C78748 0%, #AD683A 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4rpx 12rpx rgba(173, 104, 58, 0.3);
+}
+
+.play-btn.playing {
+  background: linear-gradient(135deg, #999999 0%, #666666 100%);
+}
+
+.play-icon {
+  font-size: 28rpx;
+  color: #ffffff;
+  margin-left: 4rpx;
+}
+
+.dialect-meaning {
+  font-size: 30rpx;
+  color: #333333;
+  display: block;
+  margin-bottom: 12rpx;
+  line-height: 1.5;
+}
+
+.dialect-example {
+  font-size: 26rpx;
+  color: #666666;
+  display: block;
+  font-style: italic;
+  line-height: 1.5;
+  padding: 12rpx;
+  background-color: #f9f9f9;
+  border-radius: 8rpx;
+  margin-top: 12rpx;
+}
+
+/* 标签 */
+.dialect-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin-top: 16rpx;
+}
+
+.tag-item {
+  font-size: 24rpx;
+  color: #AD683A;
+  background-color: #FFF9EF;
+  padding: 6rpx 16rpx;
+  border-radius: 8rpx;
+}
+
+/* 加载状态 */
+.loading-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40rpx 0;
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #999999;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100rpx 0;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+.empty-text {
+  font-size: 30rpx;
+  color: #999999;
+  margin-bottom: 12rpx;
+}
+
+.empty-tip {
+  font-size: 26rpx;
+  color: #cccccc;
+}
+
+/* 到底提示 */
+.no-more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40rpx 0;
+}
+
+.no-more text {
+  font-size: 26rpx;
+  color: #999999;
+}

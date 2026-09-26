@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "方言库",
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#FFF9EF",
+  "backgroundTextStyle": "dark",
+  "usingComponents": {}
+}

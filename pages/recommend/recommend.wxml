@@ -1,0 +1,21 @@
+<view class="container">
+  <view class="page-header">
+    <text class="city-tag">{{cityName}}</text>
+    <text class="page-title">推荐</text>
+  </view>
+
+  <view class="recommend-list">
+    <view class="recommend-card" wx:for="{{recommendList}}" wx:key="_id" bindtap="onRecommendTap" data-id="{{item._id}}">
+      <image class="recommend-image" src="{{item.image}}" mode="aspectFill"></image>
+      <view class="recommend-info">
+        <text class="recommend-title">{{item.title}}</text>
+        <text class="recommend-type">{{item.type}}</text>
+        <text class="recommend-brief">{{item.brief}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty-state" wx:if="{{!loading && recommendList.length === 0}}">
+    <text class="empty-text">暂无推荐</text>
+  </view>
+</view>

@@ -1,0 +1,95 @@
+<view class="container">
+  <!-- 榜单切换 + 搜索栏 -->
+  <view class="header-section">
+    <view class="tab-section">
+      <view class="tab-item {{activeTab === 'red' ? 'active' : ''}}" bindtap="switchTab" data-tab="red">
+        <text class="tab-text">红榜</text>
+        <view class="tab-indicator" wx:if="{{activeTab === 'red'}}"></view>
+      </view>
+      <view class="tab-item {{activeTab === 'black' ? 'active' : ''}}" bindtap="switchTab" data-tab="black">
+        <text class="tab-text">黑榜</text>
+        <view class="tab-indicator" wx:if="{{activeTab === 'black'}}"></view>
+      </view>
+    </view>
+    <view class="search-wrapper">
+      <input class="search-input" type="text" placeholder="搜索" value="{{searchKeyword}}" bindinput="onSearchInput" confirm-type="search" bindconfirm="onSearch" />
+    </view>
+  </view>
+
+  <!-- 分类标签 -->
+  <scroll-view class="category-scroll" scroll-x="true" show-scrollbar="false">
+    <view class="category-list">
+      <view class="category-item {{selectedCategory === '全部' ? 'active' : ''}}" bindtap="onCategoryTap" data-category="全部">
+        <text class="category-text">全部</text>
+      </view>
+      <view class="category-item {{selectedCategory === '餐饮' ? 'active' : ''}}" bindtap="onCategoryTap" data-category="餐饮">
+        <text class="category-text">餐饮</text>
+      </view>
+      <view class="category-item {{selectedCategory === '住宿' ? 'active' : ''}}" bindtap="onCategoryTap" data-category="住宿">
+        <text class="category-text">住宿</text>
+      </view>
+      <view class="category-item {{selectedCategory === '景点' ? 'active' : ''}}" bindtap="onCategoryTap" data-category="景点">
+        <text class="category-text">景点</text>
+      </view>
+      <view class="category-item {{selectedCategory === '美食' ? 'active' : ''}}" bindtap="onCategoryTap" data-category="美食">
+        <text class="category-text">美食</text>
+      </view>
+      <view class="category-item {{selectedCategory === '购物' ? 'active' : ''}}" bindtap="onCategoryTap" data-category="购物">
+        <text class="category-text">购物</text>
+      </view>
+      <view class="category-item {{selectedCategory === '其他' ? 'active' : ''}}" bindtap="onCategoryTap" data-category="其他">
+        <text class="category-text">其他</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 榜单列表 -->
+  <view class="list-section">
+    <view class="ranking-card {{activeTab}}" wx:for="{{rankingList}}" wx:key="_id" bindtap="onCardTap" data-id="{{item._id}}">
+      <view class="card-header">
+        <view class="shop-info">
+          <text class="shop-name">{{item.shopName}}</text>
+          <view class="category-tag">{{item.category}}</view>
+        </view>
+        <view class="satisfaction-section">
+          <text class="satisfaction-label">满意度</text>
+          <text class="satisfaction-value {{activeTab}}">{{item.satisfaction}}%</text>
+        </view>
+      </view>
+      <view class="card-body">
+        <view class="reason-section">
+          <text class="reason-label">{{activeTab === 'red' ? '推荐理由' : '避雷理由'}}：</text>
+          <text class="reason-content">{{item.reason}}</text>
+        </view>
+      </view>
+      
+      <!-- 图片展示区域 -->
+      <view class="card-images" wx:if="{{item.images && item.images.length > 0}}">
+        <scroll-view class="image-scroll" scroll-x="true" show-scrollbar="false">
+          <view class="image-list">
+            <image wx:for="{{item.images}}" wx:for-item="img" wx:key="index" class="card-image" src="{{img}}" mode="aspectFill" bindtap="previewCardImage" data-url="{{img}}" data-images="{{item.images}}"/>
+          </view>
+        </scroll-view>
+      </view>
+
+    </view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-more" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+
+  <view class="no-more" wx:if="{{!hasMore && rankingList.length > 0}}">
+    <text>没有更多了</text>
+  </view>
+
+  <view class="empty-state" wx:if="{{!loading && rankingList.length === 0}}">
+    <text class="empty-text">暂无{{activeTab === 'red' ? '红榜' : '黑榜'}}信息</text>
+  </view>
+
+  <!-- 悬浮发布按钮 -->
+  <view class="float-publish-btn" bindtap="goToPublishRanking">
+    <text class="publish-icon">+</text>
+  </view>
+</view>

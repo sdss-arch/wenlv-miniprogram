@@ -1,0 +1,99 @@
+.container {
+  padding: 20rpx;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.city-tag {
+  background: linear-gradient(135deg, #C78748 0%, #AD683A 100%);
+  color: #ffffff;
+  padding: 8rpx 20rpx;
+  border-radius: 8rpx;
+  font-size: 26rpx;
+  margin-right: 16rpx;
+}
+
+.page-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.creative-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10rpx;
+}
+
+.creative-card {
+  width: calc(50% - 20rpx);
+  margin: 0 10rpx 20rpx;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+.creative-image {
+  width: 100%;
+  height: 240rpx;
+  background-color: #e0e0e0;
+}
+
+.creative-info {
+  padding: 16rpx;
+}
+
+.creative-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333333;
+  display: block;
+  margin-bottom: 8rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.creative-desc {
+  font-size: 24rpx;
+  color: #666666;
+  display: block;
+  margin-bottom: 12rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.creative-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.creative-price {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #ff6b6b;
+}
+
+.creative-shop {
+  font-size: 22rpx;
+  color: #999999;
+}
+
+.empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100rpx 0;
+}
+
+.empty-text {
+  font-size: 30rpx;
+  color: #999999;
+}

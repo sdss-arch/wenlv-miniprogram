@@ -1,0 +1,73 @@
+<view class="container">
+  <!-- 介绍区域 -->
+  <view class="intro-section">
+    <view class="section-title">平台介绍</view>
+    <view class="intro-content">
+      <text class="intro-text">我们致力于为用户提供最全面、最实用的旅游文化信息服务。通过整合各地文旅资源，打造一站式旅游攻略平台，让您的每一次出行都充满惊喜。</text>
+    </view>
+  </view>
+
+  <!-- 功能特色 -->
+  <view class="features-section">
+    <view class="section-title">功能特色</view>
+    <view class="feature-list">
+      <view class="feature-item">
+        <view class="feature-icon-wrap">
+          <image class="feature-icon" src="/images/menu/景点.png" mode="aspectFit"></image>
+        </view>
+        <view class="feature-info">
+          <text class="feature-name">景点推荐</text>
+          <text class="feature-desc">精选热门景点，发现身边的美好</text>
+        </view>
+      </view>
+      <view class="feature-item">
+        <view class="feature-icon-wrap">
+          <image class="feature-icon" src="/images/menu/推荐.png" mode="aspectFit"></image>
+        </view>
+        <view class="feature-info">
+          <text class="feature-name">红黑榜单</text>
+          <text class="feature-desc">真实用户评价，避雷好帮手</text>
+        </view>
+      </view>
+      <view class="feature-item">
+        <view class="feature-icon-wrap">
+          <image class="feature-icon" src="/images/menu/我的活动.png" mode="aspectFit"></image>
+        </view>
+        <view class="feature-info">
+          <text class="feature-name">活动报名</text>
+          <text class="feature-desc">精彩活动，结识志同道合的朋友</text>
+        </view>
+      </view>
+      <view class="feature-item">
+        <view class="feature-icon-wrap">
+          <image class="feature-icon" src="/images/menu/我的攻略.png" mode="aspectFit"></image>
+        </view>
+        <view class="feature-info">
+          <text class="feature-name">旅游攻略</text>
+          <text class="feature-desc">达人分享，实用攻略随心看</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 联系方式 -->
+  <view class="contact-section">
+    <view class="section-title">联系我们</view>
+    <view class="contact-list">
+      <view class="contact-item">
+        <text class="contact-label">客服电话</text>
+        <text class="contact-value" bindtap="copyPhone">18031012843</text>
+      </view>
+      <view class="contact-item">
+        <text class="contact-label">电子邮箱</text>
+        <text class="contact-value" bindtap="copyEmail">3527645569@qq.com</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部版权 -->
+  <view class="footer">
+    <text class="copyright">© 2024 文旅小程序 版权所有</text>
+    <text class="icp">ICP备案号：京ICP备XXXXXXXX号</text>
+  </view>
+</view>

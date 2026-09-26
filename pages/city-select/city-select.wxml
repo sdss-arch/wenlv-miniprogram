@@ -1,0 +1,22 @@
+<view class="container">
+  <view class="city-select-card">
+    <view class="title">选择城市</view>
+    <view class="subtitle">请选择您要浏览的城市</view>
+    
+    <view class="form-item">
+      <text class="label">省份</text>
+      <picker bindchange="onProvinceChange" value="0" range="{{provinces}}" range-key="name">
+        <view class="picker-value">{{selectedProvince || '请选择省份'}}</view>
+      </picker>
+    </view>
+    
+    <view class="form-item">
+      <text class="label">城市</text>
+      <picker bindchange="onCityChange" value="-1" range="{{availableCities}}">
+        <view class="picker-value">{{selectedCity || '请选择城市'}}</view>
+      </picker>
+    </view>
+    
+    <button class="confirm-btn" bindtap="confirmCity">确认选择</button>
+  </view>
+</view>

@@ -1,0 +1,38 @@
+<view class="container">
+  <!-- 标题区域 -->
+  <view class="header-section">
+    <text class="guide-title">{{guide.title}}</text>
+    <view class="guide-meta">
+      <text class="guide-category">{{guide.category}}</text>
+      <text class="guide-date">{{guide.createTime}}</text>
+    </view>
+  </view>
+
+  <!-- 内容区域 -->
+  <view class="content-section">
+    <rich-text class="guide-content" nodes="{{guide.content}}"></rich-text>
+  </view>
+
+  <!-- 图片展示 -->
+  <view class="image-section" wx:if="{{guide.images && guide.images.length > 0}}">
+    <image class="guide-image" wx:for="{{guide.images}}" wx:key="index" src="{{item}}" mode="widthFix" bindtap="previewImage" data-url="{{item}}"></image>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-state" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <view class="action-btn {{isFavorited ? 'active' : ''}}" bindtap="toggleFavorite">
+      <text class="action-icon">☆</text>
+      <text class="action-text">{{isFavorited ? '已收藏' : '加入收藏'}}</text>
+    </view>
+    <view class="action-divider"></view>
+    <view class="action-btn" bindtap="shareGuide">
+      <text class="action-icon">⇪</text>
+      <text class="action-text">分享</text>
+    </view>
+  </view>
+</view>

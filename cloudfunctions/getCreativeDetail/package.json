@@ -1,0 +1,9 @@
+{
+  "name": "getCreativeDetail",
+  "version": "1.0.0",
+  "description": "获取文创产品详情",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "latest"
+  }
+}

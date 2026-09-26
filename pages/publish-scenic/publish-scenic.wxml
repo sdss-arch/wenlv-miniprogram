@@ -1,0 +1,165 @@
+<view class="container">
+  <!-- 景点名称 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot"></text>
+      <text>景点名称</text>
+    </view>
+    <input class="form-input" type="text" placeholder="请输入景点名称" value="{{form.name}}" bindinput="onInput" data-field="name" maxlength="30" />
+  </view>
+
+  <!-- 景点图片 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot"></text>
+      <text>景点图片</text>
+      <text class="char-count">{{form.image ? '1/1' : '0/1'}}</text>
+    </view>
+    <view class="image-list">
+      <view class="image-item" wx:if="{{form.image}}">
+        <image class="item-image" src="{{form.image}}" mode="aspectFill"></image>
+        <view class="delete-icon" bindtap="deleteImage">×</view>
+      </view>
+      <view wx:if="{{!form.image}}" class="upload-item" bindtap="chooseImage">
+        <view class="upload-plus">+</view>
+        <text class="upload-desc">添加图片</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 景点简介 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot"></text>
+      <text>景点简介</text>
+      <text class="char-count">{{form.brief.length || 0}}/100</text>
+    </view>
+    <textarea class="form-textarea" placeholder="请输入景点简介" value="{{form.brief}}" bindinput="onInput" data-field="brief" maxlength="100"></textarea>
+  </view>
+
+  <!-- 景点详情 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot"></text>
+      <text>景点详情</text>
+    </view>
+    <view class="content-editor">
+      <view wx:for="{{contentBlocks}}" wx:key="index" class="content-block">
+        <!-- 文本块 -->
+        <block wx:if="{{item.type === 'text'}}">
+          <textarea 
+            class="block-textarea" 
+            placeholder="{{index === 0 ? '请输入景点详细介绍...' : '继续输入...'}}"
+            value="{{item.content}}"
+            data-index="{{index}}"
+            bindinput="onContentBlockInput"
+            auto-height
+            maxlength="5000"
+          />
+        </block>
+        
+        <!-- 图片块 -->
+        <block wx:if="{{item.type === 'image'}}">
+          <view class="block-image-wrapper">
+            <image class="block-image" src="{{item.content}}" mode="widthFix" bindtap="previewBlockImage" data-src="{{item.content}}"/>
+            <view class="image-delete" bindtap="deleteContentBlock" data-index="{{index}}">
+              <text class="delete-icon">×</text>
+            </view>
+          </view>
+        </block>
+      </view>
+      
+      <!-- 空状态 -->
+      <view wx:if="{{contentBlocks.length === 0}}" class="empty-content" bindtap="addFirstTextBlock">
+        <view class="upload-plus">+</view>
+        <text class="empty-text">点击开始输入内容</text>
+      </view>
+    </view>
+    
+    <!-- 编辑器工具栏 -->
+    <view class="editor-toolbar">
+      <view class="toolbar-btn" bindtap="insertImageToContent">
+        <text class="btn-icon">📷</text>
+        <text class="btn-text">插入图片</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 景点评分 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot"></text>
+      <text>景点评分</text>
+    </view>
+    <view class="rating-box">
+      <view class="rating-stars">
+        <text class="star {{form.rating >= index + 1 ? 'active' : ''}}" 
+              wx:for="{{5}}" 
+              wx:key="index" 
+              bindtap="onRatingTap" 
+              data-rating="{{index + 1}}">★</text>
+      </view>
+      <text class="rating-score">{{form.rating}}分</text>
+    </view>
+  </view>
+
+  <!-- 景点标签 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot optional"></text>
+      <text>景点标签</text>
+    </view>
+    <view class="tag-input-box">
+      <input class="tag-input" type="text" placeholder="输入标签后点击添加" value="{{tagInput}}" bindinput="onTagInput" maxlength="10" />
+      <view class="tag-add-btn" bindtap="addTag">添加</view>
+    </view>
+    <view class="tag-list" wx:if="{{form.tags.length > 0}}">
+      <view class="tag-item" wx:for="{{form.tags}}" wx:key="index">
+        <text class="tag-text">{{item}}</text>
+        <text class="tag-delete" bindtap="removeTag" data-index="{{index}}">×</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 开放时间 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot optional"></text>
+      <text>开放时间</text>
+    </view>
+    <input class="form-input" type="text" placeholder="例如：08:00-18:00" value="{{form.openTime}}" bindinput="onInput" data-field="openTime" />
+  </view>
+
+  <!-- 门票价格 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot optional"></text>
+      <text>门票价格</text>
+    </view>
+    <input class="form-input" type="text" placeholder="例如：免费 或 50元/人" value="{{form.ticketPrice}}" bindinput="onInput" data-field="ticketPrice" />
+  </view>
+
+  <!-- 景点地址 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot optional"></text>
+      <text>景点地址</text>
+    </view>
+    <input class="form-input" type="text" placeholder="请输入景点详细地址" value="{{form.address}}" bindinput="onInput" data-field="address" />
+  </view>
+
+  <!-- 提示 -->
+  <view class="form-tip">
+    <text class="tip-text">提示：发布的内容需要审核后才能显示</text>
+  </view>
+
+  <!-- 底部占位 -->
+  <view class="bottom-placeholder"></view>
+
+  <!-- 提交按钮 -->
+  <view class="submit-bar">
+    <button class="btn-submit {{!canSubmit ? 'disabled' : ''}}" bindtap="submitForm" disabled="{{!canSubmit || submitting}}">
+      {{submitting ? '发布中...' : '确认发布'}}
+    </button>
+  </view>
+</view>

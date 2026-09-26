@@ -1,0 +1,278 @@
+.container {
+  background-color: #FFF9EF;
+  min-height: 100vh;
+  padding-bottom: 40rpx;
+}
+
+/* 头部区域：榜单切换 + 搜索栏 */
+.header-section {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 20rpx 30rpx;
+  border-bottom: 1rpx solid #eeeeee;
+}
+
+/* 榜单切换 */
+.tab-section {
+  display: flex;
+  margin-right: 30rpx;
+}
+
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10rpx 30rpx;
+  position: relative;
+}
+
+.tab-text {
+  font-size: 32rpx;
+  color: #666666;
+  font-weight: 500;
+}
+
+.tab-item.active .tab-text {
+  color: #AD683A;
+  font-weight: bold;
+}
+
+.tab-indicator {
+  position: absolute;
+  bottom: 0;
+  width: 60rpx;
+  height: 4rpx;
+  background-color: #AD683A;
+  border-radius: 2rpx;
+}
+
+/* 搜索栏 */
+.search-wrapper {
+  flex: 1;
+}
+
+.search-input {
+  width: 100%;
+  height: 64rpx;
+  background-color: #f5f5f5;
+  border-radius: 32rpx;
+  padding: 0 30rpx;
+  font-size: 28rpx;
+  color: #333333;
+  box-sizing: border-box;
+}
+
+.search-input::placeholder {
+  color: #999999;
+}
+
+/* 分类标签 */
+.category-scroll {
+  background-color: #ffffff;
+  border-bottom: 1rpx solid #eeeeee;
+}
+
+.category-list {
+  display: flex;
+  padding: 0 20rpx;
+  white-space: nowrap;
+}
+
+.category-item {
+  display: inline-flex;
+  padding: 24rpx 20rpx;
+  position: relative;
+}
+
+.category-text {
+  font-size: 30rpx;
+  color: #666666;
+}
+
+.category-item.active .category-text {
+  color: #AD683A;
+  font-weight: bold;
+}
+
+.category-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40rpx;
+  height: 4rpx;
+  background-color: #AD683A;
+  border-radius: 2rpx;
+}
+
+/* 列表区域 */
+.list-section {
+  padding: 20rpx;
+}
+
+/* 榜单卡片 */
+.ranking-card {
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16rpx;
+}
+
+.shop-info {
+  flex: 1;
+}
+
+.shop-name {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #333333;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.category-tag {
+  display: inline-block;
+  font-size: 24rpx;
+  color: #AD683A;
+  background-color: #FFF9EF;
+  padding: 4rpx 16rpx;
+  border-radius: 8rpx;
+}
+
+.satisfaction-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 20rpx;
+}
+
+.satisfaction-label {
+  font-size: 24rpx;
+  color: #999999;
+  margin-bottom: 4rpx;
+}
+
+.satisfaction-value {
+  font-size: 40rpx;
+  font-weight: bold;
+}
+
+.satisfaction-value.red {
+  color: #AD683A;
+}
+
+.satisfaction-value.black {
+  color: #AD683A;
+}
+
+.card-body {
+  margin-bottom: 16rpx;
+}
+
+.reason-section {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.reason-label {
+  font-size: 28rpx;
+  color: #666666;
+  font-weight: 500;
+}
+
+.reason-content {
+  font-size: 28rpx;
+  color: #333333;
+  line-height: 1.6;
+  flex: 1;
+}
+
+/* 图片展示区域 */
+.card-images {
+  margin-top: 16rpx;
+}
+
+.image-scroll {
+  width: 100%;
+}
+
+.image-list {
+  display: flex;
+  gap: 16rpx;
+}
+
+.card-image {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 12rpx;
+  flex-shrink: 0;
+}
+
+/* 加载状态 */
+.loading-more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40rpx 0;
+  color: #999999;
+  font-size: 28rpx;
+}
+
+.no-more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40rpx 0;
+  color: #999999;
+  font-size: 28rpx;
+}
+
+.empty-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100rpx 0;
+}
+
+.empty-text {
+  color: #999999;
+  font-size: 30rpx;
+}
+
+/* 悬浮发布按钮 */
+.float-publish-btn {
+  position: fixed;
+  right: 40rpx;
+  bottom: 100rpx;
+  width: 100rpx;
+  height: 100rpx;
+  background-color: #AD683A;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4rpx 16rpx rgba(173, 104, 58, 0.4);
+  z-index: 100;
+}
+
+.publish-icon {
+  font-size: 60rpx;
+  color: #ffffff;
+  font-weight: 300;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}

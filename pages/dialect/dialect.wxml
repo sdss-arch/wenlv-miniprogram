@@ -1,0 +1,54 @@
+<view class="container">
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <text class="city-tag">{{cityName}}</text>
+    <text class="page-title">方言库</text>
+    <view class="publish-btn" bindtap="goToPublishDialect">
+      <text class="publish-icon">+</text>
+      <text class="publish-text">发布</text>
+    </view>
+  </view>
+
+  <!-- 搜索栏 -->
+  <view class="search-section">
+    <view class="search-box">
+      <input class="search-input" type="text" placeholder="搜索方言" value="{{searchKeyword}}" bindinput="onSearchInput" confirm-type="search" bindconfirm="onSearch" />
+      <view wx:if="{{searchKeyword}}" class="clear-btn" bindtap="clearSearch">
+        <text class="clear-icon">✕</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 方言列表 -->
+  <view class="dialect-list">
+    <view class="dialect-card" wx:for="{{dialectList}}" wx:key="_id">
+      <view class="dialect-header">
+        <text class="dialect-phrase">{{item.phrase}}</text>
+        <view class="play-btn {{playingId === item._id ? 'playing' : ''}}" bindtap="playAudio" data-id="{{item._id}}" data-audio-url="{{item.audioUrl}}" wx:if="{{item.audioUrl}}">
+          <text class="play-icon">{{playingId === item._id ? '⏸' : '▶'}}</text>
+        </view>
+      </view>
+      <text class="dialect-meaning">释义：{{item.meaning}}</text>
+      <text class="dialect-example" wx:if="{{item.example}}">例句：{{item.example}}</text>
+      <view class="dialect-tags" wx:if="{{item.tags && item.tags.length > 0}}">
+        <text class="tag-item" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="index">{{tag}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-state" wx:if="{{loading}}">
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{!loading && dialectList.length === 0}}">
+    <text class="empty-text">{{searchKeyword ? '未找到相关方言' : '暂处方言数据'}}</text>
+    <text wx:if="{{searchKeyword}}" class="empty-tip">换个关键词试试</text>
+  </view>
+
+  <!-- 到底提示 -->
+  <view class="no-more" wx:if="{{!loading && !hasMore && dialectList.length > 0}}">
+    <text>没有更多了</text>
+  </view>
+</view>

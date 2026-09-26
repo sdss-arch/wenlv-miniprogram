@@ -1,0 +1,94 @@
+<view class="container" style="width: 754rpx; display: block; box-sizing: border-box">
+  <!-- 城市宣传图 -->
+  <view class="banner-section">
+    <image class="banner-image" src="{{bannerImage}}" mode="aspectFill" lazy-load style="width: 754rpx; display: inline-block; box-sizing: border-box"></image>
+  </view>
+
+  <!-- 功能区域 - 横向滑动 -->
+  <view class="function-card" style="position: relative; left: -29rpx; top: 31rpx; width: 750rpx; display: block; box-sizing: border-box">
+    <scroll-view class="function-scroll" scroll-x="true" show-scrollbar="false">
+      <view class="function-list" style="width: 660rpx; display: flex; box-sizing: border-box; position: relative; left: 0rpx; top: 2rpx">
+        <view class="function-item-new" wx:for="{{functionList}}" wx:key="id" bindtap="onFunctionTap" data-path="{{item.path}}">
+          <view class="function-icon-wrapper">
+            <image class="function-icon-img" src="{{item.icon}}" mode="aspectFill" lazy-load></image>
+          </view>
+          <text class="function-name-new">{{item.name}}</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 热门景区 - 横向滚动卡片（与旅游攻略样式一致） -->
+  <view class="section-new">
+    <view class="section-header-new">
+      <text class="section-title-new">热门景区</text>
+      <text class="more-text-new" bindtap="goToScenics">更多 ></text>
+    </view>
+    <scroll-view class="guide-scroll-new" scroll-x="true" show-scrollbar="false">
+      <view class="guide-list-overlay">
+        <view class="guide-card-overlay" wx:for="{{scenicList}}" wx:key="_id" bindtap="onScenicTap" data-id="{{item._id}}">
+          <image class="guide-image-overlay" src="{{item.image}}" mode="aspectFill" lazy-load></image>
+          <view class="guide-overlay">
+            <text class="guide-title-overlay">{{item.name}}</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 活动推荐 - 横向滚动大图卡片（图片上有诗意文字） -->
+  <view class="section-new">
+    <view class="section-header-new">
+      <text class="section-title-new">活动推荐</text>
+      <text class="more-text-new" bindtap="goToActivities">更多 ></text>
+    </view>
+    <scroll-view class="activity-scroll-poetic" scroll-x="true" show-scrollbar="false">
+      <view class="activity-list-poetic">
+        <view class="activity-card-poetic" wx:for="{{activities}}" wx:key="_id" bindtap="onActivityTap" data-id="{{item._id}}">
+          <image class="activity-image-poetic" src="{{item.coverImage}}" mode="aspectFill" lazy-load></image>
+          <!-- 诗意文字覆盖层 -->
+          <view class="activity-poetic-overlay">
+            <text class="activity-poetic-text">{{item.poeticText || '这一次，\n你是那个"讲故事的人"'}}</text>
+          </view>
+          <!-- 底部标题条 -->
+          <view class="activity-title-bar">
+            <text class="activity-title-text">{{item.title}}</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 旅行攻略 - 瀑布流卡片布局 -->
+  <view class="section-new">
+    <view class="section-header-new">
+      <text class="section-title-new">旅行攻略</text>
+      <text class="more-text-new" bindtap="goToGuides">更多 ></text>
+    </view>
+    <view class="guide-waterfall">
+      <view class="guide-waterfall-left">
+        <view class="guide-waterfall-card" wx:for="{{travelGuidesLeft}}" wx:key="_id" bindtap="onGuideTap" data-id="{{item._id}}">
+          <view class="guide-waterfall-image-wrap">
+            <image class="guide-waterfall-image" src="{{item.coverImage}}" mode="aspectFill" lazy-load></image>
+          </view>
+          <view class="guide-waterfall-content">
+            <text class="guide-waterfall-title">{{item.title}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="guide-waterfall-right">
+        <view class="guide-waterfall-card" wx:for="{{travelGuidesRight}}" wx:key="_id" bindtap="onGuideTap" data-id="{{item._id}}">
+          <view class="guide-waterfall-image-wrap">
+            <image class="guide-waterfall-image" src="{{item.coverImage}}" mode="aspectFill" lazy-load></image>
+          </view>
+          <view class="guide-waterfall-content">
+            <text class="guide-waterfall-title">{{item.title}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 城市选择弹窗 -->
+  <city-picker show="{{showCityPicker}}" bind:close="onCityPickerClose" bind:confirm="onCityPickerConfirm"></city-picker>
+</view>

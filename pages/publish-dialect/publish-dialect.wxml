@@ -1,0 +1,81 @@
+<view class="container">
+  <!-- 方言 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot"></text>
+      <text>方言</text>
+    </view>
+    <input class="form-input" type="text" placeholder="请输入方言" value="{{form.phrase}}" bindinput="onInput" data-field="phrase" maxlength="20" />
+  </view>
+
+  <!-- 释义 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot"></text>
+      <text>释义</text>
+      <text class="char-count">{{form.meaning.length || 0}}/200</text>
+    </view>
+    <textarea class="form-textarea" placeholder="请输入方言的释义" value="{{form.meaning}}" bindinput="onInput" data-field="meaning" maxlength="200" />
+  </view>
+
+  <!-- 例句 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot optional"></text>
+      <text>例句</text>
+      <text class="char-count">{{form.example.length || 0}}/200</text>
+    </view>
+    <textarea class="form-textarea" placeholder="请输入方言的例句（选填）" value="{{form.example}}" bindinput="onInput" data-field="example" maxlength="200" />
+  </view>
+
+  <!-- 音频 -->
+  <view class="form-group">
+    <view class="form-label">
+      <text class="label-dot optional"></text>
+      <text>音频</text>
+    </view>
+    <view class="audio-box">
+      <view wx:if="{{!form.audioUrl && !isRecording}}" class="audio-upload" 
+            bindlongpress="startRecord" 
+            bindtouchend="stopRecord"
+            bindtouchcancel="stopRecord">
+        <view class="upload-icon-wrap">
+          <text class="upload-icon">🎤</text>
+        </view>
+        <text class="upload-tip">长按开始录音</text>
+      </view>
+      <view wx:if="{{isRecording}}" class="audio-recording">
+        <view class="recording-animation">
+          <view class="recording-wave"></view>
+          <view class="recording-wave"></view>
+          <view class="recording-wave"></view>
+        </view>
+        <text class="recording-tip">录音中... 松开结束</text>
+        <text class="recording-time">{{recordTime}}s</text>
+      </view>
+      <view wx:if="{{form.audioUrl}}" class="audio-player">
+        <view class="player-left">
+          <view class="play-btn" bindtap="playAudio">
+            <text class="play-icon">{{isPlaying ? '❚❚' : '▶'}}</text>
+          </view>
+          <text class="audio-title">方言录音</text>
+        </view>
+        <view class="player-right">
+          <text class="delete-text" bindtap="deleteAudio">删除</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提示 -->
+  <view class="form-tip">
+    <text class="tip-text">提示：发布的内容需要审核后才能显示</text>
+  </view>
+
+  <!-- 提交按钮 -->
+  <view class="form-action">
+    <button class="btn-submit {{!canSubmit ? 'disabled' : ''}}" bindtap="submitForm" disabled="{{!canSubmit || submitting}}">
+      {{submitting ? '发布中...' : '确认发布'}}
+    </button>
+  </view>
+</view>

@@ -1,0 +1,39 @@
+<view class="container">
+  <!-- 姓名和标签 -->
+  <view class="header-section">
+    <text class="person-name">{{person.name}}</text>
+    <view class="type-tag {{person.type === 'martyr' ? 'martyr-tag' : 'celebrity-tag'}}">
+      <text>{{person.type === 'martyr' ? '革命烈士' : '名人'}}</text>
+    </view>
+  </view>
+
+  <!-- 人物照片 -->
+  <view class="photo-section">
+    <image class="person-photo" src="{{person.photo}}" mode="aspectFill"></image>
+  </view>
+
+  <!-- 个人介绍 -->
+  <view class="section">
+    <view class="section-title">
+      <view class="title-line"></view>
+      <text class="title-text">个人介绍</text>
+      <view class="title-line"></view>
+    </view>
+    <text class="section-content">{{person.introduction}}</text>
+  </view>
+
+  <!-- 人物经历 -->
+  <view class="section" wx:if="{{person.experience}}">
+    <view class="section-title">
+      <view class="title-line"></view>
+      <text class="title-text">人物经历</text>
+      <view class="title-line"></view>
+    </view>
+    <text class="section-content">{{person.experience}}</text>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-state" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>

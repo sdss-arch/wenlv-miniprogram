@@ -1,0 +1,6 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "city-picker": "/components/city-picker/city-picker"
+  }
+}
